@@ -19,10 +19,15 @@ Gem::Specification.new do |s|
   s.files = [
     ".document",
     "Gemfile",
+    "Gemfile.lock",
     "LICENSE.txt",
     "README.rdoc",
     "Rakefile",
     "VERSION",
+    "lib/seedbed.rb",
+    "lib/seedbed/system.rb",
+    "seedbed.gemspec",
+    "seeds-ext.gemspec",
     "test/helper.rb",
     "test/test_seeds-ext.rb"
   ]
