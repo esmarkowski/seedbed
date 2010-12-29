@@ -5,6 +5,6 @@ $seedbed_obj = SeedBed.new
 
 module Kernel
   extend Forwardable
-  def_delegators :$seedbed_obj, :plant
+  def_delegators :$seedbed_obj, :plant, :seed_msg
 end
 
