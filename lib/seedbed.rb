@@ -1,12 +1,15 @@
 class SeedBed
   
-  @@debug = false
-  
-  
+  @@debug = true
+  attr_accessor :path
   
   def plant( file )
-    puts "Loading #{File.expand_path("db/seeds/#{file.to_s}.rb")}" if SeedBed.debug
-    require File.expand_path("db/seeds/#{file.to_s}.rb")
+    @path = "db/seeds"
+    yield self if block_given?
+    expanded_path = File.expand_path("#{@path}/#{file.to_s}.rb")
+    puts "Growing #{expanded_path}" if SeedBed.debug
+    require expanded_path
+    
   end
   
   def self.message( msg )
