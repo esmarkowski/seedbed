@@ -27,8 +27,8 @@ Gem::Specification.new do |s|
     "lib/seedbed.rb",
     "lib/seedbed/railtie.rb",
     "lib/seedbed/system.rb",
+    "lib/tasks/tasks.rake",
     "seedbed.gemspec",
-    "tasks/tasks.rake",
     "test/helper.rb",
     "test/test_seeds-ext.rb"
   ]
