@@ -47,20 +47,22 @@ class SeedBed
   private 
   
   def self.build_tree(b)
-    
+    fil = ""
     b.keys.each do |t|
-      puts "desc \"plants seeds for #{t}\""
+      fil << "desc \"plants seeds for #{t}\" \n"
       if b[t].empty?
-      puts "task :#{t} do"
-        puts "puts \"tasks #{t}\""
-      puts "end"
+      fil << "task :#{t} do |tsk| \n"
+        fil << "puts tsk.scope[2..-1].join('/') \n"
+        fil << "SeedBed.plant( tsk.scope[2..-1].join('/') + '/' + '#{t}' )\n"
+      fil << "end \n"
       else
-        puts "namespace :#{t} do "
-          build_tree( b[t])
-        puts "end"
+        fil << "namespace :#{t} do \n"
+          fil << build_tree( b[t]  )
+          fil << "\n"
+        fil << "end \n"
       end
     end
-    
+    fil
     # branch.keys.reject{|k| branch[k].empty? }.each do |ns|
     #   namespace ns do 
     #     branch[ns].keys.each do |t|
