@@ -1,5 +1,5 @@
+require 'rails'
 class SeedBed
-  
   @@debug = true
   attr_accessor :path
   
@@ -28,6 +28,53 @@ class SeedBed
     @@debug
   end
   
+  def self.available_seeds
+    @path = "db/seeds"
+    basedir = File.join( File.expand_path(@path), "**" , "*.rb")
+    files = Dir.glob( basedir ).collect{|d| d.split( File.expand_path(@path) ).last.split('/')[1..-1].collect{|s| s.split('.rb').first.to_sym} }
+    namespaces = Hash.new{ |h,k| h[k] = Hash.new &h.default_proc }
+    files.each do |path|
+      sub = namespaces
+      path.each{ |dir| sub[dir]; sub = sub[dir] }
+    end
+    namespaces
+  end
+  
+  def self.tasks
+    build_tree( SeedBed.available_seeds )
+  end
+  
+  private 
+  
+  def self.build_tree(b)
+    
+    b.keys.each do |t|
+      puts "desc \"plants seeds for #{t}\""
+      if b[t].empty?
+      puts "task :#{t} do"
+        puts "puts \"tasks #{t}\""
+      puts "end"
+      else
+        puts "namespace :#{t} do "
+          build_tree( b[t])
+        puts "end"
+      end
+    end
+    
+    # branch.keys.reject{|k| branch[k].empty? }.each do |ns|
+    #   namespace ns do 
+    #     branch[ns].keys.each do |t|
+    #       desc "Runs seed for #{t}"
+    #       task t do 
+    #         puts "task #{t}"
+    #       end
+    #     end
+    #   end
+    # end
+  end
+  
+  
 end
 
 require 'seedbed/system'
+require 'seedbed/railtie' if defined?(Rails)
