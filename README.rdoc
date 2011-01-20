@@ -1,12 +1,29 @@
 = seedbed
+Manage groups of seeds.
 
-Manage groups of seeds. 
+= Installation
+gem install seedbed
 
-Create db/seeds/ directory; in seeds.rb 
+= Usage
+
+Create db/seeds/ directory; Place your seed files in the directory. 
+
+In seeds.rb 
 
 plant :seed_file_name
 plant :another_seed_file_name
 
+When rake db:seed is run all seed files invoked by 'plant' will be run. 
+
+= Automatic Rake Tasks
+
+Seedbed automatically generates rake tasks for existing files in the db/seeds directory. For example, if you have the file db/seeds/admin_users.rb the following rake task will be available:
+ 
+rake db:seed:admin_users 
+
+Nested directories are supported and will be used as the namespace in the rake task. For example, the file db/seeds/admin/users.rb would be accessed via:
+
+rake db:seed:admin:users
 
 == Copyright
 
