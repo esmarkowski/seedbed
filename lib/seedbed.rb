@@ -5,6 +5,7 @@ class SeedBed
   
   def plant( file )
     @path = "db/seeds"
+    # load File.expand_path("#{@path}/../../Rakefile")
     yield self if block_given?
     expanded_path = File.expand_path("#{@path}/#{file.to_s}.rb")
     puts "Growing #{expanded_path}" if SeedBed.debug
@@ -51,7 +52,7 @@ class SeedBed
     b.keys.each do |t|
       fil << "desc \"plants seeds for #{t}\" \n"
       if b[t].empty?
-      fil << "task :#{t} do |tsk| \n"
+      fil << "task :#{t} => :environment do |tsk| \n"
         fil << "puts tsk.scope[2..-1].join('/') \n"
         fil << "SeedBed.plant( tsk.scope[2..-1].join('/') + '/' + '#{t}' )\n"
       fil << "end \n"
