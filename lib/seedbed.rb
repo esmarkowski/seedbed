@@ -51,12 +51,12 @@ class SeedBed
     fil = ""
     b.keys.each do |t|
       fil << "desc \"plants seeds for #{t}\" \n"
-      if b[t].empty?
+      
       fil << "task :#{t} => :environment do |tsk| \n"
         fil << "puts tsk.scope[2..-1].join('/') \n"
         fil << "SeedBed.plant( tsk.scope[2..-1].join('/') + '/' + '#{t}' )\n"
       fil << "end \n"
-      else
+      unless b[t].empty?
         fil << "namespace :#{t} do \n"
           fil << build_tree( b[t]  )
           fil << "\n"
