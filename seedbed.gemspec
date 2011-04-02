@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{seedbed}
-  s.version = "1.1.0"
+  s.version = "1.1.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Spencer Markowski", "The Able Few"]
-  s.date = %q{2011-02-08}
+  s.date = %q{2011-04-02}
   s.description = %q{Manage seeds in individual files in db/seeds/}
   s.email = %q{spencer.markowski@gmail.com}
   s.extra_rdoc_files = [
@@ -35,7 +35,7 @@ Gem::Specification.new do |s|
   s.homepage = %q{http://github.com/esmarkowski/seedbed}
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.5.0}
+  s.rubygems_version = %q{1.5.2}
   s.summary = %q{Quick DSL to allow easier management of seeds}
   s.test_files = [
     "test/helper.rb",
